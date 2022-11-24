@@ -20,10 +20,18 @@
          </div>
          <div class="mb-3">
             <label for="type" class="form-label">Tipe</label>
-            <select class="form-select @error('type_id') is-invalid @enderror" name="type_id" required>
+            <select class="form-select @error('type_id') is-invalid @enderror" name="type" required>
                <option selected disabled hidden value="">-- Select type --</option>
-               <option value="article">Artikel</option>
-               <option value="video">Video</option>
+               @if (old('type') == 'article')
+                  <option value="article" selected>Artikel</option>
+                  <option value="video">Video</option>
+               @elseif (old('type') == 'video')
+                  <option value="article">Artikel</option>
+                  <option value="video" selected>Video</option>
+               @else
+                  <option value="article">Artikel</option>
+                  <option value="video">Video</option>
+               @endif
             </select>
             @error('type_id')
                <div class="invalid-feedback">
@@ -87,7 +95,7 @@
                <small class="d-flex justify-content-center text-muted mt-1">Thumbnail Preview</small>
             </div>
             <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail"
-               name="thumbnail" onchange="previewImage()">
+               name="thumbnail" onchange="previewImage()" required>
             @error('thumbnail')
                <div class="invalid-feedback">
                   {{ $message }}
