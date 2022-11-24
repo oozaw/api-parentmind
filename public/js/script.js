@@ -16,10 +16,10 @@ document.addEventListener("trix-file-accept", function(event) {
 // preview image
 function previewImage() {
    const imagePrevBlock = document.querySelector('.img-div');
-   const image = document.querySelector('#image');
+   const image = document.querySelector('#thumbnail');
    const imgPreview = document.querySelector('.img-preview');
 
-   // imgPreview.style.display = 'block';
+   imgPreview.style.display = 'block';
 
    const oFReader = new FileReader();
    oFReader.readAsDataURL(image.files[0]);

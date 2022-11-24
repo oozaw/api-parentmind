@@ -19,9 +19,22 @@
             @enderror
          </div>
          <div class="mb-3">
+            <label for="type" class="form-label">Tipe</label>
+            <select class="form-select @error('type_id') is-invalid @enderror" name="type_id" required>
+               <option selected disabled hidden value="">-- Select type --</option>
+               <option value="article">Artikel</option>
+               <option value="video">Video</option>
+            </select>
+            @error('type_id')
+               <div class="invalid-feedback">
+                  {{ $message }}
+               </div>
+            @enderror
+         </div>
+         <div class="mb-3" hidden>
             <label for="slug" class="form-label">Slug</label>
-            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" readonly
-               value="{{ old('slug') }}">
+            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
+               readonly value="{{ old('slug') }}">
             @error('slug')
                <div class="invalid-feedback">
                   {{ $message }}
@@ -47,14 +60,35 @@
             @enderror
          </div>
          <div class="mb-3">
-            <label for="image" class="form-label">Post Image</label>
+            <label for="source" class="form-label">Sumber Artikel/Video</label>
+            <input type="text" class="form-control @error('source') is-invalid @enderror"
+               placeholder="Masukkan pemilik artikel atau video" id="source" name="source" value="{{ old('source') }}"
+               required>
+            @error('source')
+               <div class="invalid-feedback">
+                  {{ $message }}
+               </div>
+            @enderror
+         </div>
+         <div class="mb-3">
+            <label for="link" class="form-label">Link Artikel/Video</label>
+            <input type="text" class="form-control @error('link') is-invalid @enderror" id="link" name="link"
+               value="{{ old('link') }}" required>
+            @error('link')
+               <div class="invalid-feedback">
+                  {{ $message }}
+               </div>
+            @enderror
+         </div>
+         <div class="mb-3">
+            <label for="thumbnail" class="form-label">Thumbnail</label>
             <div class="img-div col-md-8 mb-2" style="display: none">
                <img class="img-preview img-fluid rounded">
-               <small class="d-flex justify-content-center text-muted mt-1">Image Preview</small>
+               <small class="d-flex justify-content-center text-muted mt-1">Thumbnail Preview</small>
             </div>
-            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
-               onchange="previewImage()">
-            @error('image')
+            <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail"
+               name="thumbnail" onchange="previewImage()">
+            @error('thumbnail')
                <div class="invalid-feedback">
                   {{ $message }}
                </div>
@@ -77,5 +111,4 @@
    </div>
 
    <script src="/js/script.js"></script>
-
 @endsection
