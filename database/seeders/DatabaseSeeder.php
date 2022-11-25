@@ -19,14 +19,22 @@ class DatabaseSeeder extends Seeder {
             'name' => 'Wahyu Purnomo Ady',
             'username' => 'wahyuady_',
             'email' => 'wahyu@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'is_admin' => 1
         ]);
 
         User::factory(5)->create();
 
-        Post::factory(14)->create();
+        Post::factory(50)->create();
 
-        PostCategory::factory(40)->create();
+        // PostCategory::factory(40)->create();
+
+        for ($i = 0; $i <= 50; $i++) {
+            PostCategory::create([
+                "post_id" => $i + 1,
+                "category_id" => random_int(1, 8)
+            ]);
+        }
 
         Category::create([
             "name" => "Laki-laki",

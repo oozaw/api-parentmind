@@ -35,7 +35,7 @@
                      <td class="text-left">
                         @foreach ($post->categories as $category)
                            {{ $category->name }}
-                           @if ($loop->index == 2)
+                           @if ($loop->index == 2 || $loop->count == 1)
                               @if ($loop->count > 3)
                                  ...
                               @endif

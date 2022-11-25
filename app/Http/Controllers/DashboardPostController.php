@@ -17,7 +17,7 @@ class DashboardPostController extends Controller {
      */
     public function index() {
         return view('dashboard.posts.index', [
-            "posts" => Post::with(['author', 'categories'])->where('author', auth()->user()->id)->get()
+            "posts" => Post::with(['author', 'categories'])->where('author_id', auth()->user()->id)->get()
         ]);
     }
 
