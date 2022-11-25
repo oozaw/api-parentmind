@@ -14,7 +14,7 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::all();
+        $posts = Post::all()->makeHidden(['slug', 'published_at']);
 
         return ApiResponse::GetArticleResponse('success', 'Get articles successfull', $posts, 200);
     }
