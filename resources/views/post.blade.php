@@ -7,8 +7,14 @@
             <h3 class="mb-4">{{ $post->title }}</h3>
             <p>
                By: <a class="text-decoration-none" href="/post?author={{ $post->author->username }}">
-                  {{ $post->author->name }}</a> in <a href="/post?category={{ $post->category->slug }}"
-                  class="text-decoration-none">{{ $post->category->name }}</a><br>
+                  {{ $post->author->name }}</a> in
+               @foreach ($post->categories as $category)
+                  <a href="/post?category={{ $category->slug }}" class="text-decoration-none">{{ $category->name }}</a>
+                  @if (!$loop->last)
+                     ,
+                  @endif
+               @endforeach
+               <br>
                <small class="text-muted">{{ $post->created_at->format('F d, Y') }}</small>
             </p>
 
@@ -18,8 +24,8 @@
                      alt="{{ $post->category->slug }}">
                </div>
             @else
-               <img src="https://source.unsplash.com/random/1200x500?{{ $post->category->slug }}"
-                  class="img-fluid rounded" alt="{{ $post->category->slug }}">
+               <img src="https://source.unsplash.com/random/1200x500?{{ $post->categories[0]->slug }}"
+                  class="img-fluid rounded" alt="{{ $post->categories[0]->slug }}">
             @endif
 
             <article class="my-4 fs-5">
@@ -30,6 +36,4 @@
          </div>
       </div>
    </div>
-
-
 @endsection

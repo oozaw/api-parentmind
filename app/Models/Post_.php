@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Post {
+class Post_ {
     private static $blog_posts = [
         [
             "title" => "Judul Post Pertama",

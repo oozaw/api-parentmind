@@ -52,9 +52,11 @@ class AdminCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category) {
-        // dd(Post::where('category_id', $category->id)->get());
+        $posts = Category::where('id', $category->id)->get()->flatMap->posts;
+
+        // dd($posts);
         return view('dashboard.categories.show', [
-            "posts" => Post::with(['category'])->where('category_id', $category->id)->get(),
+            "posts" => $posts,
             "category" => $category
         ]);
     }

@@ -32,7 +32,19 @@
                   <tr>
                      <td>{{ $loop->iteration }}</td>
                      <td class="text-left ">{{ $post->title }}</td>
-                     <td class="text-left">{{ $post->category->name }}</td>
+                     <td class="text-left">
+                        @foreach ($post->categories as $category)
+                           {{ $category->name }}
+                           @if ($loop->index == 2)
+                              @if ($loop->count > 3)
+                                 ...
+                              @endif
+                              @break
+                           @else
+                              ,
+                           @endif
+                        @endforeach
+                     </td>
                      <td class="text-center">
                         <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info m-1">
                            <span data-feather="eye"></span>
@@ -55,9 +67,9 @@
                                  </div>
                                  <div class="modal-body">Are you sure want to delete the post?</div>
                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <form action="/dashboard/posts/{{ $post->slug }}" method="POST"
-                                       class="d-inline">
+                                    <button type="button" class="btn btn-secondary"
+                                       data-bs-dismiss="modal">Cancel</button>
+                                    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
                                        @method('delete')
                                        @csrf
                                        <button onclick="return true" class="btn btn-danger">Confirm</button>

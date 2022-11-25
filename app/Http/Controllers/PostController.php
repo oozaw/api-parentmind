@@ -40,7 +40,7 @@ class PostController extends Controller {
         return view('posts', [
             "title" => "All Posts $title",
             // untuk sorting dari yang terbaru ditambahkan dan untuk with (eager loading bisa ditempatkan pada model)
-            "posts" => Post::with(['author', 'category'])->latest()->filter(request(['author', 'category', 'keyword']))->paginate($max_post_page)->withQueryString()
+            "posts" => Post::with(['author', 'categories'])->latest()->filter(request(['author', 'category', 'keyword']))->paginate($max_post_page)->withQueryString()
             // "posts" => Post::with(['author', 'category'])->all()
         ]);
     }

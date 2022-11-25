@@ -7,7 +7,13 @@
             <h3 class="mb-2 ">{{ $post->title }}</h3>
             <p>
                <small class="text-muted">{{ $post->created_at->format('F d, Y') }} |
-                  {{ $post->category->name }}</small>
+                  @foreach ($post->categories as $category)
+                     {{ $category->name }}
+                     @if (!$loop->last)
+                        ,
+                     @endif
+                  @endforeach
+               </small>
             </p>
 
             <a class="btn btn-success" href="/dashboard/posts">
@@ -49,8 +55,8 @@
                      alt="{{ $post->category->slug }}">
                </div>
             @else
-               <img src="https://source.unsplash.com/random/1200x500?{{ $post->category->slug }}"
-                  class="img-fluid mt-3 rounded" alt="{{ $post->category->slug }}">
+               {{-- <img src="https://source.unsplash.com/random/1200x500?{{ $post->category->slug }}"
+                  class="img-fluid mt-3 rounded" alt="{{ $post->category->slug }}"> --}}
             @endif
 
             <article class="my-4 fs-5">
@@ -61,5 +67,4 @@
          </div>
       </div>
    </div>
-
 @endsection

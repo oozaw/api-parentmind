@@ -11,8 +11,12 @@ class Category extends Model {
 
     protected $guarded = ['id'];
 
+    // public function posts() {
+    //     return $this->hasMany(Post::class);
+    // }
+
     public function posts() {
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class, 'post_category')->using(PostCategory::class)->withTimestamps();
     }
 
     public function getRouteKeyName() {
