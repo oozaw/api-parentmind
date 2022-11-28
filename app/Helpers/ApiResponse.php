@@ -42,7 +42,7 @@ class ApiResponse {
          if ($articles->count() > 1) {
             $data['articles'] = $articles;
          } else {
-            $data['article'] = $articles;
+            $data['article'] = $articles->first();
          }
       }
 

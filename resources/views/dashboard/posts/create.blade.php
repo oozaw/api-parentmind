@@ -50,17 +50,16 @@
             @enderror
          </div>
          <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-select @error('category_id') is-invalid @enderror" name="category_id">
-               <option selected disabled hidden value="">-- Select category --</option>
-               @foreach ($categories as $category)
-                  @if (old('category_id') == $category->id)
-                     <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                  @else
-                     <option value="{{ $category->id }}">{{ $category->name }}</option>
-                  @endif
-               @endforeach
-            </select>
+            <label for="category" class="form-label">Kategori</label>
+            @foreach ($categories as $category)
+               <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="{{ "category_$category->id" }}"
+                     value="{{ $category->id }}" id="{{ "category_$category->id" }}">
+                  <label class="form-check-label" for="{{ "category_$category->id" }}">
+                     {{ $category->name }}
+                  </label>
+               </div>
+            @endforeach
             @error('category_id')
                <div class="invalid-feedback">
                   {{ $message }}

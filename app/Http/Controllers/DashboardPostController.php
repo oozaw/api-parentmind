@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\PostCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
@@ -39,13 +40,13 @@ class DashboardPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        // dd($request);
         $validatedData = $request->validate([
             "title" => "required|max:255",
             "type" => "required",
             "slug" => "required",
             "source" => "required",
             "link" => "required",
-            "category_id" => "required",
             "thumbnail" => "required|image|file|max:1024",
             "body" => "required"
         ]);
@@ -57,7 +58,18 @@ class DashboardPostController extends Controller {
         $validatedData["author_id"] = auth()->user()->id;
         $validatedData["excerpt"] = Str::limit(strip_tags($request->body), 200);
 
-        Post::create($validatedData);
+        $post = Post::create($validatedData);
+
+        $categories = Category::all();
+
+        $dataPostCategory = ["post_id" => $post->id];
+        foreach ($categories as $c) {
+            $index = "category_$c->id";
+            if ($request->$index != null) {
+                $dataPostCategory["category_id"] = $c->id;
+                PostCategory::create($dataPostCategory);
+            }
+        }
 
         return redirect("/dashboard/posts")->with("success", "New post has been added!");
     }
