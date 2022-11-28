@@ -9,15 +9,15 @@ Request :
 - Method : POST
 - Endpoint : `/register`
 - Header :
-  - Content-Type : application/json
-  - Accept : application/json
+  - Content-Type : `application/json`
+  - Accept : `application/json`
 - Request Body :
   
 ```json
 {
    "name": "string",
-   "username": "string",
-   "email": "string",
+   "username": "string|min:6|max:20|unique",
+   "email": "string|unique|valid email",
    "password": "string"
 }
 ```
@@ -34,8 +34,8 @@ Request :
 - Method : POST
 - Endpoint : `/login`
 - Header :
-  - Content-Type : application/json
-  - Accept : application/json
+  - Content-Type : `application/json`
+  - Accept : `application/json`
 - Request Body :
   
 ```json
@@ -67,8 +67,9 @@ Request :
 - Method : GET
 - Endpoint : `/articles`
 - Header :
-  - Content-Type : application/json
-  - Accept : application/json
+  - Content-Type : `application/json`
+  - Accept : `application/json`
+  - Authorization : `Bearer <token>`
 - Response :
 ```json
 {
@@ -88,7 +89,7 @@ Request :
          "created_at": "2022-11-24T10:37:53.000000Z",
          "updated_at": "2022-11-24T10:37:53.000000Z",
          "category": "perempuan, 1-2th"
-      },....
+      },
    ]
 }
 ```
@@ -98,8 +99,9 @@ Request :
 - Method : GET
 - Endpoint : `/articles/{id}`
 - Header :
-  - Content-Type : application/json
-  - Accept : application/json
+  - Content-Type : `application/json`
+  - Accept : `application/json`
+  - Authorization : `Bearer <token>`
 - Response :
 ```json
 {
@@ -123,3 +125,4 @@ Request :
 ```
 
 ## Delete Article
+  **TODO**

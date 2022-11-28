@@ -14,9 +14,13 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::with('categories')->get()->makeHidden(['slug', 'categories', 'published_at']);
+        $posts = Post::with('categories', 'author')->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         foreach ($posts as $p) {
+            // author
+            $p['authors'] = ($p->author->is_admin == 0) ? $p->author->name : "Admin";
+
+            // category
             $category = "";
             $count_categories = 1;
             foreach ($p->categories as $c) {
@@ -48,11 +52,15 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $post = Post::where('id', $id)->with('categories')->get()->makeHidden(['slug', 'categories', 'published_at']);
+        $post = Post::where('id', $id)->with('categories', 'author')->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
+        $p = $post->first();
+        // author
+        $p['authors'] = ($p->author->is_admin == 0) ? $p->author->name : "Admin";
+
+        // category
         $category = "";
         $count_categories = 1;
-        $p = $post->first();
         foreach ($p->categories as $c) {
             $total_categories = $p->categories->count();
             $category .= (($count_categories != $total_categories) ? "$c->name, " : "$c->name");
