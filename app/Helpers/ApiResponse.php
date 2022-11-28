@@ -4,7 +4,16 @@ namespace App\Helpers;
 
 class ApiResponse {
 
-   public static function LoginResponse($status, $message, $token, $user = null, $code) {
+   public static function response($status, $message, $code) {
+      $data = [
+         "status" => $status,
+         "message" => $message
+      ];
+
+      return response()->json($data, $code);
+   }
+
+   public static function loginResponse($status, $message, $token, $user = null, $code) {
       $data = [
          "status" => $status,
          "message" => $message,
@@ -23,14 +32,18 @@ class ApiResponse {
       return response()->json($data, $code);
    }
 
-   public static function GetArticleResponse($status, $message, $articles, $code) {
+   public static function articleGetResponse($status, $message, $articles, $code) {
       $data = [
          "status" => $status,
          "message" => $message
       ];
 
       if ($articles != null) {
-         $data['articles'] = $articles;
+         if ($articles->count() > 1) {
+            $data['articles'] = $articles;
+         } else {
+            $data['article'] = $articles;
+         }
       }
 
       return response()->json($data, $code);

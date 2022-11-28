@@ -54,7 +54,7 @@ class DashboardPostController extends Controller {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
-        $validatedData["user_id"] = auth()->user()->id;
+        $validatedData["author_id"] = auth()->user()->id;
         $validatedData["excerpt"] = Str::limit(strip_tags($request->body), 200);
 
         Post::create($validatedData);

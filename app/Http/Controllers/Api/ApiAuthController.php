@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
-use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -33,46 +31,21 @@ class ApiAuthController extends Controller {
 
         $token = $user->createToken($user->username . "-token")->plainTextToken;
 
-        return ApiResponse::LoginResponse('success', 'Login has been successful', $token, $user, 200);
-        return response()->json([
-            'status' => 200,
-            'message' => "Login successfull",
-            'user' => $user,
-            'token' => $token
-        ]);
+        return ApiResponse::loginResponse('success', 'Login has been successful', $token, $user, 200);
     }
 
-    public function authenticate(Request $request) {
-        $credentials = $request->validate([
-            "email" => "required|email",
-            "password" => "required|"
+    public function register(Request $request) {
+        $validatedData = $request->validate([
+            "name" => "required|max:255",
+            "username" => ['required', 'min:5', 'max:20', 'unique:users'],
+            "email" => "required|email:dns|unique:users",
+            "password" => "required|min:6|max:255"
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
-        try {
-            if (Auth::attempt($credentials)) {
-                // $request->session()->regenerate();
+        User::create($validatedData);
 
-                $token = $user->createToken($user->username . "-token")->plainTextToken;
-
-                return response()->json([
-                    'status' => 200,
-                    'message' => "Login successfull",
-                    'user' => $user,
-                    'token' => $token
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 300,
-                    'message' => "Login failed"
-                ], 300);
-            }
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => $e->getCode(),
-                'message' => $e->getMessage()
-            ]);
-        }
+        return ApiResponse::response('success', "Register has been successful", 200);
     }
 }
