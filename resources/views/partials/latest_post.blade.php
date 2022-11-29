@@ -1,8 +1,8 @@
 <div class="card mb-5">
    <a href="/post/{{ $posts[0]->slug }}">
-      @if ($posts[0]->image)
+      @if ($posts[0]->thumbnail)
          <div style="max-height: 500px; overflow:hidden">
-            <img src="{{ asset('storage/' . $posts[0]->image) }}" class="card-img-top"
+            <img src="{{ asset('storage/' . $posts[0]->thumbnail) }}" class="card-img-top"
                alt="{{ $posts[0]->categories[0]->slug }}">
          </div>
       @else
