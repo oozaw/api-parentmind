@@ -6,8 +6,7 @@
    </div>
 
    <div class="col-md-8">
-      <form method="POST" action="/dashboard/posts/{{ $post->slug }}" class="mb-5"
-         enctype="multipart/form-data">
+      <form method="POST" action="/dashboard/posts/{{ $post->slug }}" class="mb-5" enctype="multipart/form-data">
          @method('put')
          @csrf
          <div class="mb-3">
@@ -21,9 +20,30 @@
             @enderror
          </div>
          <div class="mb-3">
+            <label for="type" class="form-label">Tipe</label>
+            <select class="form-select @error('type') is-invalid @enderror" name="type" required>
+               <option selected disabled hidden value="">-- Select type --</option>
+               @if (old('type', $post->type) == 'article')
+                  <option value="article" selected>Artikel</option>
+                  <option value="video">Video</option>
+               @elseif (old('type', $post->type) == 'video')
+                  <option value="article">Artikel</option>
+                  <option value="video" selected>Video</option>
+               @else
+                  <option value="article">Artikel</option>
+                  <option value="video">Video</option>
+               @endif
+            </select>
+            @error('type')
+               <div class="invalid-feedback">
+                  {{ $message }}
+               </div>
+            @enderror
+         </div>
+         <div class="mb-3" hidden>
             <label for="slug" class="form-label">Slug</label>
-            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" readonly
-               value="{{ old('slug', $post->slug) }}">
+            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
+               readonly value="{{ old('slug', $post->slug) }}">
             @error('slug')
                <div class="invalid-feedback">
                   {{ $message }}
@@ -31,17 +51,21 @@
             @enderror
          </div>
          <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-select @error('category_id') is-invalid @enderror" name="category_id">
-               <option selected disabled hidden value="">-- Select category --</option>
-               @foreach ($categories as $category)
-                  @if (old('category_id', $post->category_id) == $category->id)
-                     <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+            <label for="category" class="form-label">Kategori</label>
+            @foreach ($categories as $category)
+               <div class="form-check">
+                  @if (in_array($category->id, $post_categories))
+                     <input class="form-check-input" type="checkbox" checked name="{{ "category_$category->id" }}"
+                        value="{{ $category->id }}" id="{{ "category_$category->id" }}">
                   @else
-                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                     <input class="form-check-input" type="checkbox" name="{{ "category_$category->id" }}"
+                        value="{{ $category->id }}" id="{{ "category_$category->id" }}">
                   @endif
-               @endforeach
-            </select>
+                  <label class="form-check-label" for="{{ "category_$category->id" }}">
+                     {{ $category->name }}
+                  </label>
+               </div>
+            @endforeach
             @error('category_id')
                <div class="invalid-feedback">
                   {{ $message }}
@@ -49,22 +73,43 @@
             @enderror
          </div>
          <div class="mb-3">
-            <label for="image" class="form-label">Post Image</label>
-            <input type="text" name="oldImage" value="{{ $post->image }}" hidden>
-            @if ($post->image)
+            <label for="source" class="form-label">Sumber Artikel/Video</label>
+            <input type="text" class="form-control @error('source') is-invalid @enderror"
+               placeholder="Masukkan pemilik artikel atau video" id="source" name="source"
+               value="{{ old('source', $post->source) }}" required>
+            @error('source')
+               <div class="invalid-feedback">
+                  {{ $message }}
+               </div>
+            @enderror
+         </div>
+         <div class="mb-3">
+            <label for="link" class="form-label">Link Artikel/Video</label>
+            <input type="text" class="form-control @error('link') is-invalid @enderror" id="link" name="link"
+               value="{{ old('link', $post->link) }}" required>
+            @error('link')
+               <div class="invalid-feedback">
+                  {{ $message }}
+               </div>
+            @enderror
+         </div>
+         <div class="mb-3">
+            <label for="odlThumbnail" class="form-label">Thumbnail</label>
+            <input type="text" name="oldThumbnail" value="{{ $post->thumbnail }}" hidden>
+            @if ($post->thumbnail)
                <div class="img-div col-md-8 mb-2" style="display: ">
-                  <img src="{{ asset('storage/' . $post->image) }}" class="img-preview img-fluid rounded">
-                  <small class="d-flex justify-content-center text-muted mt-1">Image Preview</small>
+                  <img src="{{ asset('storage/' . $post->thumbnail) }}" class="img-preview img-fluid rounded">
+                  <small class="d-flex justify-content-center text-muted mt-1">Thumbnail Preview</small>
                </div>
             @else
                <div class="img-div col-md-8 mb-2" style="display: none">
                   <img class="img-preview img-fluid rounded">
-                  <small class="d-flex justify-content-center text-muted mt-1">Image Preview</small>
+                  <small class="d-flex justify-content-center text-muted mt-1">Thumbnail Preview</small>
                </div>
             @endif
-            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
-               onchange="previewImage()">
-            @error('image')
+            <input class="form-control @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail"
+               name="thumbnail" onchange="previewImage()">
+            @error('thumbnail')
                <div class="invalid-feedback">
                   {{ $message }}
                </div>
@@ -88,5 +133,4 @@
    </div>
 
    <script src="/js/script.js"></script>
-
 @endsection

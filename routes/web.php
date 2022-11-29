@@ -38,7 +38,7 @@ Route::get('/about', function () {
         "user" => User::firstWhere('id', auth()->user()->id),
         "image" => "s1.png"
     ]);
-});
+})->middleware('auth');
 
 Route::get('/categories', [CategoryController::class, 'index']);
 

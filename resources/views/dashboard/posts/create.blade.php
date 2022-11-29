@@ -20,7 +20,7 @@
          </div>
          <div class="mb-3">
             <label for="type" class="form-label">Tipe</label>
-            <select class="form-select @error('type_id') is-invalid @enderror" name="type" required>
+            <select class="form-select @error('type') is-invalid @enderror" name="type" required>
                <option selected disabled hidden value="">-- Select type --</option>
                @if (old('type') == 'article')
                   <option value="article" selected>Artikel</option>
@@ -33,7 +33,7 @@
                   <option value="video">Video</option>
                @endif
             </select>
-            @error('type_id')
+            @error('type')
                <div class="invalid-feedback">
                   {{ $message }}
                </div>

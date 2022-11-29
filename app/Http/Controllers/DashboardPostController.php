@@ -51,8 +51,8 @@ class DashboardPostController extends Controller {
             "body" => "required"
         ]);
 
-        if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-images');
+        if ($request->file('thumbnail')) {
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-images');
         }
 
         $validatedData["author_id"] = auth()->user()->id;
@@ -60,6 +60,7 @@ class DashboardPostController extends Controller {
 
         $post = Post::create($validatedData);
 
+        // create instance post_category
         $categories = Category::all();
 
         $dataPostCategory = ["post_id" => $post->id];
@@ -93,8 +94,19 @@ class DashboardPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post) {
+        $post_categories = $post->categories->pluck('id')->toArray();
+
+        // $post_categories = $post->categories;
+        // foreach ($post_categories as $pc) {
+        //     // dd(PostCategory::where('post_id', $pc->pivot->post_id)->get());
+        //     PostCategory::where('post_id', $pc->pivot->post_id)->first()->delete();
+        // }
+
+
+
         return view('dashboard.posts.edit', [
             "post" => $post,
+            "post_categories" => $post_categories,
             "categories" => Category::all()
         ]);
     }
@@ -109,8 +121,10 @@ class DashboardPostController extends Controller {
     public function update(Request $request, Post $post) {
         $rules = [
             "title" => "required|max:255",
-            "category_id" => "required",
-            "image" => "image|file|max:1024",
+            "type" => "required",
+            "source" => "required",
+            "link" => "required",
+            "thumbnail" => "image|file|max:1024",
             "body" => "required"
         ];
 
@@ -120,18 +134,37 @@ class DashboardPostController extends Controller {
 
         $validatedData = $request->validate($rules);
 
-        if ($request->file('image')) {
+        if ($request->file('thumbnail')) {
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
 
-            $validatedData['image'] = $request->file('image')->store('post-images');
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-images');
         }
 
-        $validatedData["user_id"] = auth()->user()->id;
+        $validatedData["author_id"] = auth()->user()->id;
         $validatedData["excerpt"] = Str::limit(strip_tags($request->body), 200);
 
         Post::where('id', $post->id)->update($validatedData);
+
+        // -- post_category update --
+        // delete old data
+        $post_categories = $post->categories;
+        foreach ($post_categories as $pc) {
+            PostCategory::where('post_id', $pc->pivot->post_id)->first()->delete();
+        }
+
+        // add the new ones
+        $categories = Category::all();
+
+        $dataPostCategory = ["post_id" => $post->id];
+        foreach ($categories as $c) {
+            $index = "category_$c->id";
+            if ($request->$index != null) {
+                $dataPostCategory["category_id"] = $c->id;
+                PostCategory::create($dataPostCategory);
+            }
+        }
 
         return redirect("/dashboard/posts")->with("success", "Post has been updated!");
     }
