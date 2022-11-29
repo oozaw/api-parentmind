@@ -40,7 +40,9 @@ Route::get('/about', function () {
     ]);
 })->middleware('auth');
 
+// Category
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/post/categories/{slug}', [CategoryController::class, 'showCat']);
 
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');

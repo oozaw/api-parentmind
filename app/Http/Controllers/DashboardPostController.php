@@ -96,14 +96,6 @@ class DashboardPostController extends Controller {
     public function edit(Post $post) {
         $post_categories = $post->categories->pluck('id')->toArray();
 
-        // $post_categories = $post->categories;
-        // foreach ($post_categories as $pc) {
-        //     // dd(PostCategory::where('post_id', $pc->pivot->post_id)->get());
-        //     PostCategory::where('post_id', $pc->pivot->post_id)->first()->delete();
-        // }
-
-
-
         return view('dashboard.posts.edit', [
             "post" => $post,
             "post_categories" => $post_categories,
@@ -176,8 +168,8 @@ class DashboardPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post) {
-        if ($post->image) {
-            Storage::delete($post->image);
+        if ($post->thumbnail) {
+            Storage::delete($post->thumbnail);
         }
 
         Post::destroy($post->id);

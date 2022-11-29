@@ -24,8 +24,7 @@ class PostController extends Controller {
         }
 
         if (request('category')) {
-            $category = Category::firstWhere('slug', request('category'));
-            $title = "in " . $category->name;
+            return redirect("/post/categories/" . request('category'));
         }
 
         // kurang baik jika mengacu konsep mvc karena seharusnya yang mengolah data adalah model bukan controllers
@@ -40,7 +39,7 @@ class PostController extends Controller {
         return view('posts', [
             "title" => "All Posts $title",
             // untuk sorting dari yang terbaru ditambahkan dan untuk with (eager loading bisa ditempatkan pada model)
-            "posts" => Post::with(['author', 'categories'])->latest()->filter(request(['author', 'category', 'keyword']))->paginate($max_post_page)->withQueryString()
+            "posts" => Post::with(['author', 'categories'])->latest()->filter(request(['author', 'keyword']))->paginate($max_post_page)->withQueryString()
             // "posts" => Post::with(['author', 'category'])->all()
         ]);
     }

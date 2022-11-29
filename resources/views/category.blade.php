@@ -1,8 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-   <h2 class="mb-4">Post Category: {{ $title }}</h2>
+   <h2 class="mb-4 text-center">{{ $title }}</h2>
 
    @include('partials.list_post')
-   
 @endsection

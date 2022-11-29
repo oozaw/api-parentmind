@@ -49,10 +49,9 @@
                </div>
             </form>
 
-            @if ($post->image)
+            @if ($post->thumbnail)
                <div style="max-height: 500px; overflow: hidden">
-                  <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid mt-3 rounded"
-                     alt="{{ $post->category->slug }}">
+                  <img src="{{ asset('storage/' . $post->thumbnail) }}" class="img-fluid mt-3 rounded" alt="thumbnail">
                </div>
             @else
                <img src="https://source.unsplash.com/random/1200x500?{{ $post->categories[0]->slug }}"

@@ -42,10 +42,9 @@
                         <a href="/post?category={{ $post->categories[0]->slug }}"
                            class="text-white text-decoration-none">{{ $post->categories[0]->name }}</a>
                      </div>
-                     @if ($post->image)
+                     @if ($post->thumbnail)
                         <div style="max-height: 500px; overflow: hidden">
-                           <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top"
-                              alt="{{ $post->categories[0]->slug }}">
+                           <img src="{{ asset('storage/' . $post->thumbnail) }}" class="card-img-top" alt="thumbnail">
                         </div>
                      @else
                         <img src="https://source.unsplash.com/random/500x300?{{ $post->categories[0]->slug }}"

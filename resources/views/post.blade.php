@@ -18,10 +18,10 @@
                <small class="text-muted">{{ $post->created_at->format('F d, Y') }}</small>
             </p>
 
-            @if ($post->image)
+            @if ($post->thumbnail)
                <div style="max-height: 500px; overflow: hidden">
-                  <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid rounded"
-                     alt="{{ $post->category->slug }}">
+                  <img src="{{ asset('storage/' . $post->thumbnail) }}" class="img-fluid rounded"
+                     alt="{{ $post->categories[0]->slug }}">
                </div>
             @else
                <img src="https://source.unsplash.com/random/1200x500?{{ $post->categories[0]->slug }}"
