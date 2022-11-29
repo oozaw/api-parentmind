@@ -2,7 +2,7 @@
 API for ParentMind project
 
 # API Spec
-- URL : `https://api-parentmind.com/api`
+- URL : `https://www.parentmind.my.id/api`
 
 ## Register
 Request :
