@@ -96,18 +96,18 @@ Request :
    "message": "Articles has been fetched successfully",
    "articles": [
       {
-         "id": 1,
-         "type": "article",
-         "title": "Impedit molestias.",
-         "author": "admin",
-         "thumbnail": "https://parentmind.com/thumbnail.png",
-         "excerpt": "Fuga dignissimos vel temporibus consequatur dolore",
-         "body": "<p>Quo reprehenderit ea eos aliquid et velit nam. Accusamus et aut rem ipsa. Fuga temporibus placeat aut sed repellat. Totam dolores nostrum cumque laboriosam consequatur.</p>",
-         "source": "",
-         "link": "https://example-source.com",
-         "created_at": "2022-11-24T10:37:53.000000Z",
-         "updated_at": "2022-11-24T10:37:53.000000Z",
-         "category": "perempuan, 1-2th"
+         "id": 54,
+         "type": "video",
+         "title": "Tutorial Docker Dasar",
+         "thumbnail": "post-images/BaUdjm7o6hhAIRwgAUDvGo3wbXvwoGAhCgodJDl3.jpg",
+         "excerpt": "Hi guys, ini adalah video pertama tentang roadmap Docker, dimana di video pertama ini, kita akan membahas tentang dasar-dasar Docker.#docker #container #programmerzamannow Slide : https://docs.google....",
+         "body": "<div>Hi guys, ini adalah video pertama tentang roadmap Docker, dimana di video pertama ini, kita akan membahas tentang dasar-dasar Docker.<br><br><a href=\"https://www.youtube.com/hashtag/docker\">#docker</a> <a href=\"https://www.youtube.com/hashtag/container\">#container</a> <a href=\"https://www.youtube.com/hashtag/programmerzamannow\">#programmerzamannow</a>",
+         "source": "Programmer Zaman Now",
+         "link": "https://youtu.be/3_yxVjV88Zk",
+         "created_at": "2022-11-29T03:14:49.000000Z",
+         "updated_at": "2022-11-29T07:01:16.000000Z",
+         "authors": "Admin",
+         "category": "Laki-laki, Perempuan, 7-12 th, 13-16 th, 17-21 th"
       },
    ]
 }
@@ -127,19 +127,19 @@ Request :
    "status": true,
    "message": "Article has been fetched successfully",
    "article": {
-      "id": 1,
-      "type": "article",
-      "title": "Impedit molestias.",
-      "author": "admin",
-      "thumbnail": "https://parentmind.com/thumbnail.png",
-      "excerpt": "Fuga dignissimos vel temporibus consequatur dolore",
-      "body": "<p>Quo reprehenderit ea eos aliquid et velit nam. Accusamus et aut rem ipsa. Fuga temporibus placeat aut sed repellat. Totam dolores nostrum cumque laboriosam consequatur.</p>",
-      "source": "",
-      "link": "https://example-source.com",
-      "created_at": "2022-11-24T10:37:53.000000Z",
-      "updated_at": "2022-11-24T10:37:53.000000Z",
-      "category": "perempuan, 1-2th"
-   },
+      "id": 54,
+      "type": "video",
+      "title": "Tutorial Docker Dasar",
+      "thumbnail": "post-images/BaUdjm7o6hhAIRwgAUDvGo3wbXvwoGAhCgodJDl3.jpg",
+      "excerpt": "Hi guys, ini adalah video pertama tentang roadmap Docker, dimana di video pertama ini, kita akan membahas tentang dasar-dasar Docker.#docker #container #programmerzamannow Slide : https://docs.google....",
+      "body": "<div>Hi guys, ini adalah video pertama tentang roadmap Docker, dimana di video pertama ini, kita akan membahas tentang dasar-dasar Docker.<br><br><a href=\"https://www.youtube.com/hashtag/docker\">#docker</a> <a href=\"https://www.youtube.com/hashtag/container\">#container</a> <a href=\"https://www.youtube.com/hashtag/programmerzamannow\">#programmerzamannow</a>",
+      "source": "Programmer Zaman Now",
+      "link": "https://youtu.be/3_yxVjV88Zk",
+      "created_at": "2022-11-29T03:14:49.000000Z",
+      "updated_at": "2022-11-29T07:01:16.000000Z",
+      "authors": "Admin",
+      "category": "Laki-laki, Perempuan, 7-12 th, 13-16 th, 17-21 th"
+   }
 }
 ```
 
