@@ -71,6 +71,24 @@ Request :
   - Content-Type : `application/json`
   - Accept : `application/json`
   - Authorization : `Bearer <token>`
+- Parameter :
+  - `type` as `video | article`, optional
+  - `category` as `laki-laki | perempuan | 1-2th | 3-4th | 7-12th | 13-16th | 17-21th`, optional
+  
+  ----------------
+  *TODO Coming Up*
+  - Category :
+    - `laki-laki` as `1 | 0`, default `0`, optional
+    - `perempuan` as `1 | 0`, default `0`, optional
+    - `1-2th` as `1 | 0`, default `0`, optional
+    - `3-4th` as `1 | 0`, default `0`, optional
+    - `7-12th` as `1 | 0`, default `0`, optional
+    - `13-16th` as `1 | 0`, default `0`, optional
+    - `17-21th` as `1 | 0`, default `0`, optional
+    - Notes :
+      - 1 for get all articles with related category
+      - 0 for get all articles without considering related category
+  ----------------
 - Response :
 ```json
 {

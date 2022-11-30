@@ -35,55 +35,58 @@
                      <td class="text-left">
                         @foreach ($post->categories as $category)
                            {{ $category->name }}
-                           @if ($loop->index == 2 || $loop->count == 1)
+                           @if ($loop->iteration == 3)
                               @if ($loop->count > 3)
                                  ...
                               @endif
-                              @break
-                           @else
+                           @break
+
+                        @else
+                           @if (!$loop->last)
                               ,
                            @endif
-                        @endforeach
-                     </td>
-                     <td class="text-center">
-                        <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info m-1">
-                           <span data-feather="eye"></span>
-                        </a>
-                        <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning m-1">
-                           <span data-feather="edit"></span>
-                        </a>
+                        @endif
+                     @endforeach
+                  </td>
+                  <td class="text-center">
+                     <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info m-1">
+                        <span data-feather="eye"></span>
+                     </a>
+                     <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning m-1">
+                        <span data-feather="edit"></span>
+                     </a>
 
-                        {{-- Modal Trigger Button --}}
-                        <button type="button" class="btn btn-danger text-dark m-1 border-0" data-bs-toggle="modal"
-                           data-bs-target="#deleteModal{{ $post->id }}"><span data-feather="trash-2"></span></button>
+                     {{-- Modal Trigger Button --}}
+                     <button type="button" class="btn btn-danger text-dark m-1 border-0" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ $post->id }}"><span data-feather="trash-2"></span></button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="deleteModal{{ $post->id }}" tabindex="-1" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteModalLabel">Delete Post</h5>
-                                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal"></button>
-                                 </div>
-                                 <div class="modal-body">Are you sure want to delete the post?</div>
-                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                       data-bs-dismiss="modal">Cancel</button>
-                                    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
-                                       @method('delete')
-                                       @csrf
-                                       <button onclick="return true" class="btn btn-danger">Confirm</button>
-                                    </form>
-                                 </div>
+                     <!-- Modal -->
+                     <div class="modal fade" id="deleteModal{{ $post->id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="deleteModalLabel">Delete Post</h5>
+                                 <button type="button" class="btn-close me-1" data-bs-dismiss="modal"></button>
+                              </div>
+                              <div class="modal-body">Are you sure want to delete the post?</div>
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                 <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button onclick="return true" class="btn btn-danger">Confirm</button>
+                                 </form>
                               </div>
                            </div>
                         </div>
-                     </td>
-                  </tr>
-               @endforeach
+                     </div>
+                  </td>
+               </tr>
+            @endforeach
 
-            </tbody>
-         @endif
-      </table>
-   </div>
+         </tbody>
+      @endif
+   </table>
+</div>
 @endsection

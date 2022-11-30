@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Post;
+use App\Models\Category;
 use App\Helpers\ApiResponse;
+use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Post;
 
 class ApiPostController extends Controller {
     /**
@@ -14,7 +16,22 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::with('categories', 'author')->latest()->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
+        $posts = Post::with('categories', 'author')->latest();
+        // $posts = Post::with('categories', 'author')->latest()->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
+
+        if (request('type')) {
+            // $category_id = Category::firstWhere('slug', request('category'))->id;
+            // $posts_categories = PostCategory::where('category_id', $category_id)->pluck('post_id')->toArray();
+            $posts = $posts->where('type', request('type'));
+        }
+
+        if (request('category')) {
+            $category_id = Category::firstWhere('slug', request('category'))->id;
+            $posts_categories = PostCategory::where('category_id', $category_id)->pluck('post_id')->toArray();
+            $posts = $posts->whereIn('id', $posts_categories);
+        }
+
+        $posts = $posts->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         foreach ($posts as $p) {
             // author

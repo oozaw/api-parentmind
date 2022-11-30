@@ -6,14 +6,21 @@
          <div class="col-md-10">
             <h3 class="mb-4">{{ $post->title }}</h3>
             <p>
-               By: <a class="text-decoration-none" href="/post?author={{ $post->author->username }}">
-                  {{ $post->author->name }}</a> in
+               @if ($post->type == 'article')
+                  Article
+               @else
+                  Video
+               @endif
+               by <a class="text-decoration-none" href="/post?author={{ $post->author->username }}">
+                  {{ $post->author->name }}
+               </a> in
                @foreach ($post->categories as $category)
                   <a href="/post?category={{ $category->slug }}" class="text-decoration-none">{{ $category->name }}</a>
                   @if (!$loop->last)
                      ,
                   @endif
                @endforeach
+               from <a class="text-decoration-none" href="{{ $post->link }}" target="_blank">{{ $post->source }}</a>
                <br>
                <small class="text-muted">{{ $post->created_at->format('F d, Y') }}</small>
             </p>

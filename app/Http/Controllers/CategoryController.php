@@ -40,7 +40,7 @@ class CategoryController extends Controller {
 
         $category_id = Category::firstWhere('slug', $request->slug)->id;
         $posts_categories = PostCategory::where('category_id', $category_id)->pluck('post_id')->toArray();
-        $posts = Post::whereIn('id', $posts_categories);
+        $posts = Post::whereIn('id', $posts_categories)->latest();
 
         return view('category', [
             "title" => "All Post in $title",

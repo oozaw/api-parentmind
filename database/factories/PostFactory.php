@@ -13,7 +13,7 @@ class PostFactory extends Factory {
     public function definition() {
         return [
             "title" => $this->faker->sentence(mt_rand(3, 7)),
-            "type" => $this->faker->randomElement(['artikel', 'video']),
+            "type" => $this->faker->randomElement(['article', 'video']),
             "slug" => $this->faker->unique()->slug(),
             "author_id" => mt_rand(1, 5),
             // "category_id" => mt_rand(1, 4),

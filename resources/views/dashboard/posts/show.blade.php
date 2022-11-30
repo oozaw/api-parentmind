@@ -7,12 +7,18 @@
             <h3 class="mb-2 ">{{ $post->title }}</h3>
             <p>
                <small class="text-muted">{{ $post->created_at->format('F d, Y') }} |
+                  @if ($post->type == 'article')
+                     Article
+                  @else
+                     Video
+                  @endif |
                   @foreach ($post->categories as $category)
                      {{ $category->name }}
                      @if (!$loop->last)
                         ,
                      @endif
                   @endforeach
+                  | <a class="text-decoration-none" href="{{ $post->link }}" target="_blank">{{ $post->source }}</a>
                </small>
             </p>
 
