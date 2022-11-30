@@ -31,8 +31,8 @@
                      alt="{{ $post->categories[0]->slug }}">
                </div>
             @else
-               <img src="https://source.unsplash.com/random/1200x500?{{ $post->categories[0]->slug }}"
-                  class="img-fluid rounded" alt="{{ $post->categories[0]->slug }}">
+               <img src="/image/{{ $post->categories[0]->slug }}.jpg" class="img-fluid rounded"
+                  alt="{{ $post->categories[0]->slug }}">
             @endif
 
             <article class="my-4 fs-5">

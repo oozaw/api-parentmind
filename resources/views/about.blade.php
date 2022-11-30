@@ -6,7 +6,7 @@
 
       <h4>{{ $user->name }}</h4>
       <p>{{ $user->email }}</p>
-      <img src="image/{{ $image }}" alt="{{ $user->name }}" width="200px" class="img-thumbnail rounded-circle">
+      <img src="image/{{ $image }}" alt="{{ $user->name }}" style="object-fit: cover;" width="200px" height="200px"
+         class="img-thumbnail rounded-circle">
    </div>
-
 @endsection

@@ -47,8 +47,8 @@
                            <img src="{{ asset('storage/' . $post->thumbnail) }}" class="card-img-top" alt="thumbnail">
                         </div>
                      @else
-                        <img src="https://source.unsplash.com/random/500x300?{{ $post->categories[0]->slug }}"
-                           class="card-img-top" alt="{{ $post->categories[0]->slug }}">
+                        <img src="/image/{{ $post->categories[0]->slug }}.jpg" class="card-img-top"
+                           alt="{{ $post->categories[0]->slug }}">
                      @endif
                   </div>
                   <div class="card-body">
