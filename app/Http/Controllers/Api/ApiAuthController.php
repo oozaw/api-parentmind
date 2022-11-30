@@ -31,7 +31,7 @@ class ApiAuthController extends Controller {
 
         $token = $user->createToken($user->username . "-token")->plainTextToken;
 
-        return ApiResponse::loginResponse('success', 'Login has been successful', $token, $user, 200);
+        return ApiResponse::loginResponse(true, 'Login has been successful', $token, $user, 200);
     }
 
     public function register(Request $request) {
@@ -46,6 +46,6 @@ class ApiAuthController extends Controller {
 
         User::create($validatedData);
 
-        return ApiResponse::response('success', "Register has been successful", 200);
+        return ApiResponse::response(true, "Register has been successful", 200);
     }
 }

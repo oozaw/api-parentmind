@@ -14,7 +14,7 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::with('categories', 'author')->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
+        $posts = Post::with('categories', 'author')->latest()->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         foreach ($posts as $p) {
             // author
@@ -32,7 +32,7 @@ class ApiPostController extends Controller {
             $p['category'] = $category;
         }
 
-        return ApiResponse::articleGetResponse('success', 'Articles has been fetched successfully', $posts, 200);
+        return ApiResponse::articleGetResponse(true, 'Articles has been fetched successfully', $posts, 200);
     }
 
     /**
@@ -69,7 +69,7 @@ class ApiPostController extends Controller {
 
         $p['category'] = $category;
 
-        return ApiResponse::articleGetResponse('success', 'Article has been fetched successfully', $post, 200);
+        return ApiResponse::articleGetResponse(true, 'Article has been fetched successfully', $post, 200);
     }
 
     /**

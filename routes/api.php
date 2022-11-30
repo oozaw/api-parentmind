@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // auth
 Route::post('/login', [ApiAuthController::class, 'login']);
-Route::post('/register', [ApiPostController::class, 'register']);
+Route::post('/register', [ApiAuthController::class, 'register']);
 
 // articles
 Route::get('/articles', [ApiPostController::class, 'index'])->middleware('auth:sanctum');

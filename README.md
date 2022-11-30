@@ -24,7 +24,7 @@ Request :
 - Response :
 ```json
 {
-   "status": "success",
+   "status": true,
    "message": "Register has been successful"
 }
 ```
@@ -47,7 +47,7 @@ Request :
 - Response :
 ```json
 {
-   "status": "success",
+   "status": true,
    "message": "Login has been successful",
    "user": {
       "id": "2",
@@ -74,7 +74,7 @@ Request :
 - Response :
 ```json
 {
-   "status": "success",
+   "status": true,
    "message": "Articles has been fetched successfully",
    "articles": [
       {
@@ -106,7 +106,7 @@ Request :
 - Response :
 ```json
 {
-   "status": "success",
+   "status": true,
    "message": "Article has been fetched successfully",
    "article": {
       "id": 1,
