@@ -37,6 +37,9 @@ class ApiPostController extends Controller {
             // author
             $p['authors'] = ($p->author->is_admin == 0) ? $p->author->name : "Admin";
 
+            // thumbnail link
+            $p['thumbnail'] = asset('storage/' . $p->thumbnail);
+
             // category
             $category = "";
             $count_categories = 1;
