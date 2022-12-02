@@ -20,6 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// documentation
+Route::get('/', function () {
+    return redirect('https://github.com/oozaw/api-parentmind#api-parentmind');
+});
+
 // auth
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::post('/register', [ApiAuthController::class, 'register']);
