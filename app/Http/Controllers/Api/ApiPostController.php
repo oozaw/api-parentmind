@@ -16,7 +16,7 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::with('categories', 'author')->latest();
+        $posts = Post::with('categories', 'author')->latest()->take(10);
         // $posts = Post::with('categories', 'author')->latest()->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         if (request('type')) {
