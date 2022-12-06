@@ -60,7 +60,12 @@ class ApiAuthController extends Controller {
 
         // create user if not registered yet
         if (!in_array($request->email, $listUsers)) {
+            $listUsernames = User::all()->pluck('username')->toArray();
             $validatedData['username'] = str_replace(" ", "", strtolower($request->name));
+            while (in_array($validatedData['username'], $listUsernames)) {
+                $validatedData['username'] = str_replace(" ", "", strtolower($request->name) . rand());
+            }
+
             $validatedData['password'] = Hash::make($validatedData['password']);
 
             User::create($validatedData);
