@@ -18,7 +18,7 @@ Request :
    "name": "string",
    "username": "string|min:6|max:20|unique",
    "email": "string|unique|valid email",
-   "password": "string"
+   "password": "string|min:6"
 }
 ```
 - Response :
