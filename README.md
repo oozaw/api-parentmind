@@ -60,6 +60,40 @@ Request :
    }
 }
 ```
+
+## Login Firebase
+Request :
+- Method : POST
+- Endpoint : `/login-fb`
+- Header :
+  - Content-Type : `application/json`
+  - Accept : `application/json`
+- Request Body :
+  
+```json
+{
+   "name": "string",
+   "email": "string|unique|valid email",
+   "password": "string|min:6"
+}
+```
+- Response :
+```json
+{
+   "status": true,
+   "message": "Login has been successful",
+   "user": {
+      "id": "2",
+      "name": "Brody Jhonson",
+      "username": "jhonson_21",
+      "email": "brjhon@example.com",
+      "token": "14|70nhABDJEhXcuaRJmtvtaXD2AbYyKu8pFs2X7wZj",
+      "created_at": "2022-11-24T10:37:52.000000Z",
+      "updated_at": "2022-11-24T10:37:52.000000Z",
+   }
+}
+```
+
 ## Create Article
 **TODO**
 

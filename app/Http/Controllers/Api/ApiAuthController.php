@@ -48,4 +48,39 @@ class ApiAuthController extends Controller {
 
         return ApiResponse::response(true, "Register has been successful", 200);
     }
+
+    public function loginFB(Request $request) {
+        $validatedData = $request->validate([
+            "name" => "required|max:255",
+            "email" => "required|email:dns",
+            "password" => "required|min:6|max:255"
+        ]);
+
+        $listUsers = User::all()->pluck('email')->toArray();
+
+        // create user if not registered yet
+        if (!in_array($request->email, $listUsers)) {
+            $validatedData['username'] = str_replace(" ", "", strtolower($request->name));
+            $validatedData['password'] = Hash::make($validatedData['password']);
+
+            User::create($validatedData);
+        }
+
+        // try to login with it
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        if (($user->tokens()->where('tokenable_id', $user->id)->count()) != 0) {
+            $user->tokens()->where('tokenable_id', $user->id)->delete();
+        }
+
+        $token = $user->createToken($user->username . "-token")->plainTextToken;
+
+        return ApiResponse::loginResponse(true, 'Login has been successful', $token, $user, 200);
+    }
 }

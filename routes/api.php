@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 // auth
 Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/login-fb', [ApiAuthController::class, 'loginFB']);
 Route::post('/register', [ApiAuthController::class, 'register']);
 
 // articles
