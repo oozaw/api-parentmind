@@ -16,7 +16,7 @@ class ApiPostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = Post::with('categories', 'author')->latest()->take(10);
+        $posts = Post::with('categories', 'author')->latest();
         // $posts = Post::with('categories', 'author')->latest()->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         if (request('type')) {
@@ -31,7 +31,21 @@ class ApiPostController extends Controller {
             $posts = $posts->whereIn('id', $posts_categories);
         }
 
-        $posts = $posts->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
+        if (request('size')) {
+            if (request('page')) {
+                $posts = $posts->paginate(request('size'));
+            } else {
+                $posts = $posts->take(request('size'))->get();
+            }
+        } else {
+            if (request('page')) {
+                $posts = $posts->paginate(10);
+            } else {
+                $posts = $posts->take(10)->get();
+            }
+        }
+
+        $posts = $posts->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         foreach ($posts as $p) {
             // author
