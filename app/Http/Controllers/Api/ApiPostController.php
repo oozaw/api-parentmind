@@ -17,12 +17,13 @@ class ApiPostController extends Controller {
      */
     public function index() {
         $posts = Post::with('categories', 'author')->latest();
-        // $posts = Post::with('categories', 'author')->latest()->get()->makeHidden(['author_id', 'author', 'slug', 'categories', 'published_at']);
 
         if (request('type')) {
-            // $category_id = Category::firstWhere('slug', request('category'))->id;
-            // $posts_categories = PostCategory::where('category_id', $category_id)->pluck('post_id')->toArray();
             $posts = $posts->where('type', request('type'));
+        }
+
+        if (request('q')) {
+            $posts = $posts->filter(request(['q']));
         }
 
         if (request('category')) {
