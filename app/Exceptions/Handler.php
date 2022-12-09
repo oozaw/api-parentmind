@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler {
                 return response()->json([
                     'status' => false,
                     'message' => $e->getMessage()
-                ], 401);
+                ], 200);
             }
         });
 
@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler {
                     'status' => false,
                     'message' => $e->getMessage(),
                     'errors' => $e->errors()
-                ], $e->status);
+                ], 200);
             }
         });
     }
