@@ -108,8 +108,9 @@ Request :
 - Parameter :
   - `type` as `video | article`, optional
   - `size` as `Int`, optional
-  - `page` as `Int`, optional
-  - `category` as `laki-laki | perempuan | 1-2th | 3-4th | 7-12th | 13-16th | 17-21th`, optional
+  - `page` as `Int`, optional,
+  - `gender` as `laki-laki | perempuan`, optional
+  - `category` as `1-2th | 3-4th | 7-12th | 13-16th | 17-21th`, optional
   - `q` as `String` for searching, optional
   
   ----------------

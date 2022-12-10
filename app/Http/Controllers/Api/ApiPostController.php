@@ -32,6 +32,12 @@ class ApiPostController extends Controller {
             $posts = $posts->whereIn('id', $posts_categories);
         }
 
+        if (request('gender')) {
+            $category_id = Category::firstWhere('slug', request('gender'))->id;
+            $posts_categories = PostCategory::where('category_id', $category_id)->pluck('post_id')->toArray();
+            $posts = $posts->whereIn('id', $posts_categories);
+        }
+
         if (request('size')) {
             if (request('page')) {
                 $posts = $posts->paginate(request('size'));
