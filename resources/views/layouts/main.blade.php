@@ -5,6 +5,13 @@
    <!-- Required meta tags -->
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="author" content="Wahyu Purnomo Ady" />
+   <meta name="description" content="Website Artikel Parenting" />
+   <meta name="keyword" content="parentmind, parenting, orang tua, api, blog" />
+   <base href="http://parentmind.my.id/" />
+   {{-- <link rel="shortcut icon"
+      href="http://pidekso.desa.id/assets/files/data/website-desa-pidekso-3312032007/pemda_wonogiri.png"
+      type="image/x-icon" /> --}}
 
    {{-- Icon --}}
    <link rel="icon" type="image/gif/png" href="/image/family.png">
